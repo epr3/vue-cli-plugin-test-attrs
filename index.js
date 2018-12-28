@@ -19,7 +19,12 @@ if (defaultOptions.enabled === undefined && process.env.NODE_ENV === 'test') {
 }
 
 module.exports = (api, projectOptions) => {
-  const pluginOptions = projectOptions.pluginOptions.testAttrs || {}
+  let pluginOptions = {}
+
+  if (projectOptions.pluginOptions) {
+    pluginOptions = projectOptions.pluginOptions.testAttrs
+  }
+
   const options = { ...defaultOptions, ...pluginOptions }
 
   if (options.enabled === false) return
